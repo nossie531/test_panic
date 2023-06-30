@@ -1,0 +1,10 @@
+[package]
+name = "test_panic"
+version = "0.1.0"
+authors = ["Nossie531"]
+edition = "2021"
+description = "Utility for test cases with panic."
+repository = "https://github.com/nossie531/test_panic"
+license = "MIT OR Apache-2.0"
+keywords = ["test", "panic", "should_panic"]
+categories = ["development-tools::testing"]
