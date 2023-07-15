@@ -8,8 +8,9 @@ Utility for test cases with panic.
 
 ## What is this?
 
-Provides functions for test with panic. It allows for somewhat more
-flexible testing than using the Rust standard `shoud_panic`.
+Provides functions for test with panic. For the same purpose, the `shoud_panic`
+attribute is provided in the Rust standard, but it is not so useful, hence we
+created this crate.
 
 ## Examples
 
@@ -31,6 +32,16 @@ Example with `should_panic`.
 #[test]
 #[should_panic(expected = "message.")]
 fn test() {
+    // Suppresses standard error output.
+    panic::set_hook(Box::new(|_| {}));
+
     panic!("message.");
 }
 ```
+
+# What's New
+
+At Version 0.2.0.
+
+* Some document is polished.
+* `TestPanicResult` holds value on cases where no panic occurred.
