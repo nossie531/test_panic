@@ -5,7 +5,7 @@ use std::any::Any;
 /// Result of [`test_panic`](crate::test_panic::test_panic) method.
 #[derive(Debug)]
 pub enum TestPanicResult<R> {
-    /// No panic.
+    /// No panic with return result.
     Cool(R),
     /// Panic with some payload.
     Panic(Box<dyn Any + Send>),
