@@ -1,6 +1,6 @@
 [package]
 name = "test_panic"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Nossie531"]
 edition = "2021"
 description = "Utility for test cases with panic."

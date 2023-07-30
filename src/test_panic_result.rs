@@ -2,12 +2,12 @@
 
 use std::any::Any;
 
-/// Result of [`test_panic`](crate::test_panic::test_panic) method.
+/// Result of [`test_panic`](crate::test_panic::test_panic) function.
 #[derive(Debug)]
 pub enum TestPanicResult<R> {
-    /// No panic with return result.
+    /// No panic result. Contains callback function result.
     Cool(R),
-    /// Panic with some payload.
+    /// Panic result. Contains panic payload.
     Panic(Box<dyn Any + Send>),
 }
 
