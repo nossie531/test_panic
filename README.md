@@ -41,7 +41,11 @@ fn test() {
 
 # What's New
 
-At Version 0.2.0.
+v0.3.0
+
+* `must_use` annotations are added at `TestPanicResult`.
+
+v0.2.0
 
 * Some document is polished.
 * `TestPanicResult` holds value on cases where no panic occurred.

@@ -3,6 +3,7 @@
 use std::any::Any;
 
 /// Result of [`test_panic`](crate::test_panic::test_panic) function.
+#[must_use]
 #[derive(Debug)]
 pub enum TestPanicResult<R> {
     /// No panic result. Contains callback function result.
@@ -13,11 +14,13 @@ pub enum TestPanicResult<R> {
 
 impl<R> TestPanicResult<R> {
     /// Returns `true` if self is [`Cool`](Self::Cool).
+    #[must_use]
     pub fn is_cool(&self) -> bool {
         matches!(*self, Self::Cool(_))
     }
 
     /// Returns `true` if self is [`Panic`](Self::Panic).
+    #[must_use]
     pub fn is_panic(&self) -> bool {
         matches!(*self, Self::Panic(_))
     }
@@ -43,6 +46,7 @@ impl<R> TestPanicResult<R> {
     /// # Panics
     ///
     /// Panics if self is [`Panic`](Self::Panic).
+    #[must_use]
     pub fn value(&self) -> &R {
         match self {
             Self::Cool(x) => x,
@@ -55,6 +59,7 @@ impl<R> TestPanicResult<R> {
     /// # Panics
     ///
     /// Panics if self is [`Cool`](Self::Cool).
+    #[must_use]
     pub fn payload(&self) -> &Box<dyn Any + Send> {
         match self {
             Self::Cool(_) => panic!("`self` is cool."),
@@ -68,6 +73,7 @@ impl<R> TestPanicResult<R> {
     ///
     /// Panics if self is [`Cool`](Self::Cool) or panic payload is not
     /// [`&str`] or [`String`].
+    #[must_use]
     pub fn message(&self) -> String {
         if self.is_cool() {
             panic!("`self` is cool.");

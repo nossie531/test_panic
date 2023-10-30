@@ -18,12 +18,11 @@ use std::panic::{AssertUnwindSafe, PanicInfo};
 /// This function is intended only for use in test automation and is not
 /// suitable for other situations.
 ///
-/// ###### After closure aborted
+/// ###### After panic
 ///
-/// When panic occurs, closure execution is of course aborted. Especially in
-/// functions called from closures, if such an abort is not assumed,
-/// a logically inconsistent situation may occur. Therefore, access to each
-/// state after a panic should be done with great care.
+/// If `f` panics, the logical invariance condition can be broken unless
+/// the operations in f take post-panic operations into account. Therefore,
+/// access to each state after panic should be done with great care.
 pub fn test_panic<F, R>(f: F) -> TestPanicResult<R>
 where
     F: FnOnce() -> R,
