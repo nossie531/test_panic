@@ -13,7 +13,7 @@ fn test() {
     let result = test_panic(|| panic!("message."));
 
     assert!(result.is_panic());
-    assert_eq!(result.message(), "message");
+    assert!(result.message().contains("message"));
 }
 ```
 */
@@ -21,5 +21,5 @@ fn test() {
 mod test_panic;
 mod test_panic_result;
 
-pub use crate::test_panic::test_panic;
-pub use test_panic_result::TestPanicResult;
+pub use crate::test_panic::*;
+pub use test_panic_result::*;

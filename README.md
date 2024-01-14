@@ -22,7 +22,7 @@ fn test() {
     let result = test_panic(|| panic!("message."));
 
     assert!(result.is_panic());
-    assert_eq!(result.message(), "message.");
+    assert!(result.message().contains("message."));
 }
 ```
 
@@ -40,6 +40,10 @@ fn test() {
 ```
 
 # What's New
+
+v0.3.1
+
+* Minor refactoring.
 
 v0.3.0
 
