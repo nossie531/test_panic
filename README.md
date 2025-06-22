@@ -17,10 +17,11 @@ created this crate.
 Example with this crate.
 
 ```rust
+use test_panic::prelude::*;
+
 #[test]
 fn test() {
     let result = test_panic(|| panic!("message."));
-
     assert!(result.is_panic());
     assert!(result.message().contains("message."));
 }
@@ -34,12 +35,19 @@ Example with `should_panic`.
 fn test() {
     // Suppresses standard error output.
     panic::set_hook(Box::new(|_| {}));
-
     panic!("message.");
 }
 ```
 
-# What's New
+## What's New
+
+v0.4.0
+
+* Rust edition is updated to 2024.
+* Add `prelude` module (Although this crate is very small).
+* Follow latest `std` API (`PanicHookInfo` instead of `PanicInfo`).
+* Fix broken unit tests.
+* Polish documentations.
 
 v0.3.1
 

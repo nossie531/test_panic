@@ -2,7 +2,7 @@
 
 use std::any::Any;
 
-/// Result of [`test_panic`](crate::test_panic::test_panic) function.
+/// Result of [`test_panic`](crate::test_panic) function.
 #[must_use]
 #[derive(Debug)]
 pub enum TestPanicResult<R> {
@@ -41,7 +41,7 @@ impl<R> TestPanicResult<R> {
         }
     }
 
-    /// Return result value.
+    /// Returns result value.
     ///
     /// # Panics
     ///
@@ -54,7 +54,7 @@ impl<R> TestPanicResult<R> {
         }
     }
 
-    /// Return panic payload.
+    /// Returns panic payload.
     ///
     /// # Panics
     ///
@@ -67,7 +67,7 @@ impl<R> TestPanicResult<R> {
         }
     }
 
-    /// Return panic payload.
+    /// Returns panic message.
     ///
     /// # Panics
     ///

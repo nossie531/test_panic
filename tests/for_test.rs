@@ -1,6 +1,7 @@
 #![allow(unused)]
 
-use std::{any::Any, panic};
+use std::any::Any;
+use std::panic;
 
 pub fn cast<T: Any>(val: &Box<dyn Any + Send>) -> &T {
     val.downcast_ref::<T>().unwrap()

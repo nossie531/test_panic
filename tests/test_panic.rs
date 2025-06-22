@@ -2,7 +2,7 @@ mod for_test;
 
 use for_test::{cast, dyn_eq};
 use std::panic::panic_any;
-use test_panic::test_panic;
+use test_panic::prelude::*;
 
 #[test]
 fn with_cool_void() {
@@ -30,8 +30,12 @@ fn with_panic_empty() {
     let def_msg = result.message().clone();
     assert!(!result.is_cool());
     assert!(result.is_panic());
-    assert!(cast::<&str>(result.payload()) == &def_msg);
-    assert!(result.panic().is_some_and(|x| cast::<&str>(&x) == &def_msg));
+    assert!(cast::<String>(result.payload()) == &def_msg);
+    assert!(
+        result
+            .panic()
+            .is_some_and(|x| cast::<String>(&x) == &def_msg)
+    );
 }
 
 #[test]
