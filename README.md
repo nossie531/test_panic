@@ -39,25 +39,6 @@ fn test() {
 }
 ```
 
-## What's New
+## Versions
 
-v0.4.0
-
-* Rust edition is updated to 2024.
-* Add `prelude` module (Although this crate is very small).
-* Follow latest `std` API (`PanicHookInfo` instead of `PanicInfo`).
-* Fix broken unit tests.
-* Polish documentations.
-
-v0.3.1
-
-* Minor refactoring.
-
-v0.3.0
-
-* `must_use` annotations are added at `TestPanicResult`.
-
-v0.2.0
-
-* Some document is polished.
-* `TestPanicResult` holds value on cases where no panic occurred.
+See [CHANGELOG](CHANGELOG.md).
