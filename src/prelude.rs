@@ -1,3 +1,3 @@
 //! Crate's prelude.
 
-pub use crate::functions::test_panic;
+pub use crate::funcs::test_panic;

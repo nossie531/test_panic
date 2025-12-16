@@ -1,10 +1,9 @@
-test_panic
-===
+# test_panic
 
 Utility for test cases with panic.
 
-*The author of this crate is not good at English.*  
-*Forgive me if the document is hard to read.*
+_The author of this crate is not good at English._  
+_Forgive me if the document is hard to read._
 
 ## What is this?
 
@@ -39,6 +38,6 @@ fn test() {
 }
 ```
 
-## Versions
+## History
 
 See [CHANGELOG](CHANGELOG.md).

@@ -1,8 +1,8 @@
 mod for_test;
 
-use for_test::{cast, dyn_eq};
-use std::panic::panic_any;
-use test_panic::prelude::*;
+use for_test::*;
+use std::panic;
+use test_panic::*;
 
 #[test]
 fn with_cool_void() {
@@ -62,7 +62,7 @@ fn with_panic_string() {
 
 #[test]
 fn with_panic_any() {
-    let result = test_panic(|| panic_any(false));
+    let result = test_panic(|| panic::panic_any(false));
 
     assert!(!result.is_cool());
     assert!(result.is_panic());

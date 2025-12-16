@@ -1,6 +1,6 @@
 //! Provider of [`test_panic`].
 
-use crate::TestPanicResult;
+use crate::*;
 use std::panic;
 use std::panic::{AssertUnwindSafe, PanicHookInfo};
 

@@ -1,5 +1,6 @@
 //! Provider of [`TestPanicResult`].
 
+use crate::*;
 use std::any::Any;
 
 /// Result of [`test_panic`](crate::test_panic) function.
@@ -79,22 +80,62 @@ impl<R> TestPanicResult<R> {
             panic!("`self` is cool.");
         }
 
-        match Self::string_like_to_string(self.payload().as_ref()) {
+        match self.get_message() {
             None => panic!("Panic payload is not string like."),
             Some(x) => x,
         }
     }
 
-    /// Converts string like value to string.
-    fn string_like_to_string(any: &(dyn Any + Send)) -> Option<String> {
-        if let Some(x) = any.downcast_ref::<&str>() {
-            return Some(x.to_string());
+    /// Returns panic message if exists.
+    #[must_use]
+    pub fn get_message(&self) -> Option<String> {
+        if self.is_cool() {
+            return None;
         }
 
-        if let Some(x) = any.downcast_ref::<String>() {
-            return Some(x.to_owned());
-        }
+        util::string_like_to_string(self.payload().as_ref())
+    }
 
-        None
+    /// Tests `self` and `other` values to be nearly equal.
+    ///
+    /// This method ignores error payload. This is useful when comparing
+    /// two functions with similar behavior, but where only the error
+    /// messages differ.
+    #[must_use]
+    pub fn nearly_eq(&self, other: &Self) -> bool
+    where
+        R: PartialEq,
+    {
+        match (self, other) {
+            (Self::Cool(l0), Self::Cool(r0)) => l0 == r0,
+            (Self::Panic(_), Self::Panic(_)) => true,
+            _ => false,
+        }
+    }
+}
+
+impl<R> Eq for TestPanicResult<R>
+where
+    R: Eq,
+{
+    // nop.
+}
+
+/// Compare result and error message.
+///
+/// # Notes
+///
+/// Errors are compared by [`Self::get_message`].
+/// So, precise values of error payloads are not used.
+impl<R> PartialEq for TestPanicResult<R>
+where
+    R: PartialEq,
+{
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::Cool(l0), Self::Cool(r0)) => l0 == r0,
+            (Self::Panic(_), Self::Panic(_)) => self.get_message() == other.get_message(),
+            _ => false,
+        }
     }
 }
