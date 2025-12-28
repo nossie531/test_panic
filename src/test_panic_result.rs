@@ -96,9 +96,26 @@ impl<R> TestPanicResult<R> {
         util::string_like_to_string(self.payload().as_ref())
     }
 
+    /// Tests `self` and `other` values to be almost equal.
+    ///
+    /// This method ignores error message, only if `other` has no message.
+    /// This is useful for toggling verification based on whether the
+    /// message is known or not.
+    #[must_use]
+    pub fn almost_eq(&self, other: &Self) -> bool
+    where
+        R: PartialEq,
+    {
+        if other.get_message().is_none() {
+            self.nearly_eq(other)
+        } else {
+            self.eq(other)
+        }
+    }
+
     /// Tests `self` and `other` values to be nearly equal.
     ///
-    /// This method ignores error payload. This is useful when comparing
+    /// This method ignores error message. This is useful when comparing
     /// two functions with similar behavior, but where only the error
     /// messages differ.
     #[must_use]
@@ -107,7 +124,7 @@ impl<R> TestPanicResult<R> {
         R: PartialEq,
     {
         match (self, other) {
-            (Self::Cool(l0), Self::Cool(r0)) => l0 == r0,
+            (Self::Cool(x), Self::Cool(y)) => x == y,
             (Self::Panic(_), Self::Panic(_)) => true,
             _ => false,
         }

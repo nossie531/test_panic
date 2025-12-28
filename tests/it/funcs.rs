@@ -1,6 +1,4 @@
-mod for_test;
-
-use for_test::*;
+use crate::for_test::*;
 use std::panic;
 use test_panic::*;
 
@@ -15,7 +13,7 @@ fn with_cool_void() {
 
 #[test]
 fn with_cool_return() {
-    let result = test_panic(|| "ok");
+    let result = test_panic::<_, &str>(|| "ok");
 
     assert!(result.is_cool());
     assert!(!result.is_panic());
@@ -30,12 +28,8 @@ fn with_panic_empty() {
     let def_msg = result.message().clone();
     assert!(!result.is_cool());
     assert!(result.is_panic());
-    assert!(cast::<String>(result.payload()) == &def_msg);
-    assert!(
-        result
-            .panic()
-            .is_some_and(|x| cast::<String>(&x) == &def_msg)
-    );
+    assert!(cast::<&str>(result.payload()) == &def_msg);
+    assert!(result.panic().is_some_and(|x| cast::<&str>(&x) == &def_msg));
 }
 
 #[test]
@@ -51,7 +45,7 @@ fn with_panic_str() {
 
 #[test]
 fn with_panic_string() {
-    let result = test_panic(|| panic!("{}", "ng"));
+    let result = test_panic::<_, Ty>(|| panic!("{}", "ng"));
 
     assert!(!result.is_cool());
     assert!(result.is_panic());
@@ -62,7 +56,7 @@ fn with_panic_string() {
 
 #[test]
 fn with_panic_any() {
-    let result = test_panic(|| panic::panic_any(false));
+    let result = test_panic::<_, Ty>(|| panic::panic_any(false));
 
     assert!(!result.is_cool());
     assert!(result.is_panic());

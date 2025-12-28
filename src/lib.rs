@@ -8,13 +8,42 @@
 //!
 //! # Examples
 //!
+//! Example with always panic.
+//!
 //! ```no_run
-//! # // `no_run` is answer for `test_attr_in_doctest` of Clippy.
+//! use test_panic::prelude::*;
+//!
 //! #[test]
 //! fn test() {
 //!     let result = test_panic(|| panic!("message."));
 //!     assert!(result.is_panic());
 //!     assert!(result.message().contains("message"));
+//! }
+//! ```
+//!
+//! Example with multiple tests.
+//!
+//! ```no_run
+//! use test_panic::prelude::*;
+//!
+//! #[test]
+//! fn with_multi_tests() {
+//!     let datas = [
+//!         ((10, 3), ok(3)),
+//!         ((10, 0), ng()),
+//!         ((10, 15), msg("Result is too small")),
+//!     ];
+//!
+//!     for ((x, y), tobe) in datas {
+//!         let asis = test_panic(|| divide(x, y));
+//!         assert!(asis.almost_eq(&tobe));
+//!     }
+//! }
+//!
+//! fn divide(x: i32, y: i32) -> i32 {
+//!     assert!(y > 0);
+//!     assert!(x / y >= 1, "Result is too small");
+//!     x / y
 //! }
 //! ```
 

@@ -1,6 +1,7 @@
 //! Provider of [`test_panic`].
 
 use crate::*;
+use std::any::Any;
 use std::panic;
 use std::panic::{AssertUnwindSafe, PanicHookInfo};
 
@@ -39,4 +40,22 @@ where
     }
 
     TestPanicResult::Cool(result.unwrap())
+}
+
+/// Shorthand of [`TestPanicResult::Cool`].
+pub fn ok<R>(value: R) -> TestPanicResult<R> {
+    TestPanicResult::Cool(value)
+}
+
+/// Shorthand of [`TestPanicResult::Panic`] without payload.
+pub fn ng<R>() -> TestPanicResult<R> {
+    TestPanicResult::Panic(Box::new(()))
+}
+
+/// Shorthand of [`TestPanicResult::Panic`] with payload.
+pub fn msg<R, P>(payload: P) -> TestPanicResult<R>
+where
+    P: Any + Send,
+{
+    TestPanicResult::Panic(Box::new(payload))
 }

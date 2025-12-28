@@ -11,9 +11,9 @@ Provides functions for test with panic. For the same purpose, the `shoud_panic`
 attribute is provided in the Rust standard, but it is not so useful, hence we
 created this crate.
 
-## Examples
+## Example 1
 
-Example with this crate.
+Example with always panic.
 
 ```rust
 use test_panic::prelude::*;
@@ -26,7 +26,7 @@ fn test() {
 }
 ```
 
-Example with `should_panic`.
+Following is equivalent code with `should_panic`.
 
 ```rust
 #[test]
@@ -35,6 +35,34 @@ fn test() {
     // Suppresses standard error output.
     panic::set_hook(Box::new(|_| {}));
     panic!("message.");
+}
+```
+
+## Example 2
+
+Example with multiple tests (This cannot be done with `should_panic`.).
+
+```rust
+use test_panic::prelude::*;
+
+#[test]
+fn with_multi_tests() {
+    let datas = [
+        ((10, 3), ok(3)),
+        ((10, 0), ng()),
+        ((10, 15), msg("Result is too small")),
+    ];
+
+    for ((x, y), tobe) in datas {
+        let asis = test_panic(|| divide(x, y));
+        assert!(asis.almost_eq(&tobe));
+    }
+}
+
+fn divide(x: i32, y: i32) -> i32 {
+    assert!(y > 0);
+    assert!(x / y >= 1, "Result is too small");
+    x / y
 }
 ```
 
