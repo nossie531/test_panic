@@ -3,7 +3,7 @@
 use crate::*;
 use std::any::Any;
 
-/// Result of [`test_panic`](crate::test_panic) function.
+/// Result of [`test_panic`] function.
 #[must_use]
 #[derive(Debug)]
 pub enum TestPanicResult<R> {
