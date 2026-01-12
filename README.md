@@ -40,7 +40,7 @@ fn test() {
 
 ## Example 2
 
-Example with multiple tests (This cannot be done with `should_panic`.).
+Example with multiple tests (This cannot be done with `should_panic`).
 
 ```rust
 use test_panic::prelude::*;
