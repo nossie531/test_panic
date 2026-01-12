@@ -7,7 +7,7 @@ _Forgive me if the document is hard to read._
 
 ## What is this?
 
-Provides functions for test with panic. For the same purpose, the `shoud_panic`
+Provides functions for test with panic. For the same purpose, `shoud_panic`
 attribute is provided in the Rust standard, but it is not so useful, hence we
 created this crate.
 
@@ -55,7 +55,7 @@ fn with_multi_tests() {
 
     for ((x, y), tobe) in datas {
         let asis = test_panic(|| divide(x, y));
-        assert!(asis.almost_eq(&tobe));
+        assert_eqa!(asis, tobe);
     }
 }
 

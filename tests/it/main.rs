@@ -1,5 +1,6 @@
 mod for_test;
 mod funcs;
+mod macros;
 mod test_panic_result;
 
 use test_panic::prelude::*;
@@ -14,7 +15,7 @@ fn with_multi_tests() {
 
     for ((x, y), tobe) in datas {
         let asis = test_panic(|| divide(x, y));
-        assert!(asis.almost_eq(&tobe));
+        assert_eqa!(asis, tobe);
     }
 }
 

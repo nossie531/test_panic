@@ -3,7 +3,7 @@
 //! _The author of this crate is not good at English._  
 //! _Forgive me if the document is hard to read._
 //!
-//! For the same purpose, the `shoud_panic` attribute is provided in the
+//! For the same purpose, `shoud_panic` attribute is provided in the
 //! Rust standard, but it is not so useful, hence we created this crate.
 //!
 //! # Examples
@@ -36,7 +36,7 @@
 //!
 //!     for ((x, y), tobe) in datas {
 //!         let asis = test_panic(|| divide(x, y));
-//!         assert!(asis.almost_eq(&tobe));
+//!         assert_eqa!(asis, tobe);
 //!     }
 //! }
 //!
@@ -47,11 +47,15 @@
 //! }
 //! ```
 
+#![warn(missing_docs)]
+#![forbid(unsafe_code)]
+
+pub mod msg;
 pub mod prelude;
-
-mod funcs;
-mod test_panic_result;
-mod util;
-
 pub use funcs::*;
 pub use test_panic_result::*;
+
+mod funcs;
+mod macros;
+mod test_panic_result;
+mod util;

@@ -102,12 +102,12 @@ impl<R> TestPanicResult<R> {
     /// This is useful for toggling verification based on whether the
     /// message is known or not.
     #[must_use]
-    pub fn almost_eq(&self, other: &Self) -> bool
+    pub fn eq_almost(&self, other: &Self) -> bool
     where
         R: PartialEq,
     {
         if other.get_message().is_none() {
-            self.nearly_eq(other)
+            self.eq_nearly(other)
         } else {
             self.eq(other)
         }
@@ -119,7 +119,7 @@ impl<R> TestPanicResult<R> {
     /// two functions with similar behavior, but where only the error
     /// messages differ.
     #[must_use]
-    pub fn nearly_eq(&self, other: &Self) -> bool
+    pub fn eq_nearly(&self, other: &Self) -> bool
     where
         R: PartialEq,
     {

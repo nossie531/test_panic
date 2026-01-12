@@ -120,7 +120,7 @@ fn get_message() {
 }
 
 #[test]
-fn almost_eq() {
+fn eq_almost() {
     with_same_cool_vs_cool();
     with_diff_cool_vs_cool();
     with_same_panic_vs_panic();
@@ -132,55 +132,55 @@ fn almost_eq() {
     fn with_same_cool_vs_cool() {
         let target = TestPanicResult::Cool(42);
         let other = TestPanicResult::Cool(42);
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(result);
     }
 
     fn with_diff_cool_vs_cool() {
         let target = TestPanicResult::Cool(42);
         let other = TestPanicResult::Cool(43);
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(!result);
     }
 
     fn with_same_panic_vs_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new("foo"));
         let other = TestPanicResult::<Ty>::Panic(Box::new("foo"));
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(result);
     }
 
     fn with_diff_panic_vs_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new("foo"));
         let other = TestPanicResult::<Ty>::Panic(Box::new("bar"));
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(!result);
     }
 
     fn with_panic_vs_empty_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new("foo"));
         let other = TestPanicResult::<Ty>::Panic(Box::new(()));
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(result);
     }
 
     fn with_empty_panic_vs_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new(()));
         let other = TestPanicResult::<Ty>::Panic(Box::new("foo"));
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(!result);
     }
 
     fn with_cool_vs_empty_panic() {
         let target = TestPanicResult::<Ty>::Cool(42);
         let other = TestPanicResult::<Ty>::Panic(Box::new(()));
-        let result = target.almost_eq(&other);
+        let result = target.eq_almost(&other);
         assert!(!result);
     }
 }
 
 #[test]
-fn nearly_eq() {
+fn eq_nearly() {
     with_same_cool_vs_cool();
     with_diff_cool_vs_cool();
     with_same_panic_vs_panic();
@@ -189,28 +189,28 @@ fn nearly_eq() {
     fn with_same_cool_vs_cool() {
         let target = TestPanicResult::Cool(42);
         let other = TestPanicResult::Cool(42);
-        let result = target.nearly_eq(&other);
+        let result = target.eq_nearly(&other);
         assert!(result);
     }
 
     fn with_diff_cool_vs_cool() {
         let target = TestPanicResult::Cool(42);
         let other = TestPanicResult::Cool(43);
-        let result = target.nearly_eq(&other);
+        let result = target.eq_nearly(&other);
         assert!(!result);
     }
 
     fn with_same_panic_vs_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new("foo"));
         let other = TestPanicResult::<Ty>::Panic(Box::new("foo"));
-        let result = target.nearly_eq(&other);
+        let result = target.eq_nearly(&other);
         assert!(result);
     }
 
     fn with_diff_panic_vs_panic() {
         let target = TestPanicResult::<Ty>::Panic(Box::new("foo"));
         let other = TestPanicResult::<Ty>::Panic(Box::new(false));
-        let result = target.nearly_eq(&other);
+        let result = target.eq_nearly(&other);
         assert!(result);
     }
 }

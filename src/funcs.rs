@@ -1,4 +1,4 @@
-//! Provider of [`test_panic`].
+//! Crate's functions.
 
 use crate::*;
 use std::any::Any;
